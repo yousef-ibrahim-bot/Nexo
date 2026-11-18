@@ -68,7 +68,9 @@ export default function Settings({ onUpdatePassword }: SettingsProps) {
       setRePassword("");
       setSuccess("Password updated successfully!");
     } catch (error) {
-      setError(error ? error.message : "Unable to update password.");
+      setError(
+        error instanceof Error ? error.message : "Unable to update password.",
+      );
     } finally {
       setIsPending(false);
     }

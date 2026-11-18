@@ -43,7 +43,7 @@ export default function Home() {
   })
   
   const {id} = useParams()
-  const {data:commentData , isLoading:commentLoading , isError:commentsIsError}= useQuery({
+  const {data:commentData }= useQuery({
     queryKey:["comments", id],
     queryFn:({ signal }) => {
       return axios.get(

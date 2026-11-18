@@ -17,19 +17,19 @@ export type Privacy = "public" | "followers" | "private";
 
 type CreatePostProps = {
   onCreatePost: (
-    body: string | null,
+    body: string,
     privacy: Privacy,
-    image: File | null,
+    image: File | null
   ) => Promise<void>;
 };
 
-export default function CreatePost({ onCreatePost }: CreatePostProps) {
+export default function CreatePost({ }: CreatePostProps) {
   const { Token } = useContext(CreatedAuthenticationContext)!;
   const [body, setBody] = useState("");
   const [privacy, setPrivacy] = useState<Privacy>("public");
   const [image, setImage] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
-  const [submitting, setSubmitting] = useState(false);
+  const [submitting] = useState(false);
   const [error, setError] = useState("");
   
 
@@ -69,7 +69,7 @@ export default function CreatePost({ onCreatePost }: CreatePostProps) {
   }
 
   const queryClient = useQueryClient();
-  const { mutate, isPending } = useMutation({
+  const { mutate} = useMutation({
     mutationFn: (formData: FormData) => {
       return axios.post("https://route-posts.routemisr.com/posts", formData, {
         headers: {
